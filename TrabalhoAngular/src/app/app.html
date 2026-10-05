@@ -1,0 +1,22 @@
+<div style="padding: 20px; font-family: sans-serif; max-width: 400px;">
+  <h2>Cálculo da Média Parcial</h2>
+
+  <div style="margin-bottom: 10px;">
+    <label for="bim1">Nota 1º Bimestre: </label>
+    <input id="bim1" type="number" [(ngModel)]="bim1" />
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <label for="bim2">Nota 2º Bimestre: </label>
+    <input id="bim2" type="number" [(ngModel)]="bim2" />
+  </div>
+
+  <button (click)="calcularMedia()">Calcular Média</button>
+
+  @if (media !== null) {
+    <div style="margin-top: 15px; padding: 10px; background-color: #f4f4f4; border-radius: 4px;">
+      <p><strong>Média Parcial:</strong> {{ media }}</p>
+      <p><strong>Situação:</strong> {{ situacao }}</p>
+    </div>
+  }
+</div>
