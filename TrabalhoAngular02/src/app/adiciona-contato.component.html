@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>Cadastrar Novo Contacto</h2>
+  
+  <form (ngSubmit)="adicionar()" class="form-grid">
+    <div class="field">
+      <label>Nome:</label>
+      <input type="text" [(ngModel)]="nome" name="nome" required />
+    </div>
+
+    <div class="field">
+      <label>Telefone:</label>
+      <input type="text" [(ngModel)]="telefone" name="telefone" required />
+    </div>
+
+    <div class="field">
+      <label>E-mail:</label>
+      <input type="email" [(ngModel)]="email" name="email" />
+    </div>
+
+    <div class="field">
+      <label>Aniversário:</label>
+      <input type="date" [(ngModel)]="aniversario" name="aniversario" />
+    </div>
+
+    <div class="field">
+      <label>Tipo:</label>
+      <select [(ngModel)]="tipo" name="tipo">
+        <option value="Amigo(a)">Amigo(a)</option>
+        <option value="Família">Família</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Outro">Outro</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn-salvar">Adicionar Contacto</button>
+  </form>
+
+  <hr />
+
+  <h2>Lista de Contactos</h2>
+  
+  <table class="tabela-contatos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th>Aniversário</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of listaContatos">
+        <td>{{ c.nome }}</td>
+        <td>{{ c.telefone }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.aniversario }}</td>
+        <td>{{ c.tipo }}</td>
+      </tr>
+      <tr *ngIf="listaContatos.length === 0">
+        <td colspan="5" class="vazio">Nenhum contacto cadastrado.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
