@@ -1,0 +1,128 @@
+<div class="container">
+  <h2>Agenda de Contatos</h2>
+
+  <form [formGroup]="formContato" (ngSubmit)="adicionarContato()" class="form-contato">
+    <div class="campo">
+      <label for="nome">Nome:</label>
+      <input
+        type="text"
+        id="nome"
+        formControlName="nome"
+        placeholder="Digite o nome"
+      />
+      <small
+        style="color: #d32f2f; font-size: 13px;"
+        *ngIf="formContato.get('nome')?.invalid && formContato.get('nome')?.touched"
+      >
+        <span *ngIf="formContato.get('nome')?.hasError('required')">
+          O nome é obrigatório.
+        </span>
+        <span *ngIf="formContato.get('nome')?.hasError('minlength')">
+          O nome deve ter pelo menos 3 caracteres.
+        </span>
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="telefone">Telefone:</label>
+      <input
+        type="tel"
+        id="telefone"
+        formControlName="telefone"
+        placeholder="(84) 99999-9999"
+      />
+      <small
+        style="color: #d32f2f; font-size: 13px;"
+        *ngIf="formContato.get('telefone')?.invalid && formContato.get('telefone')?.touched"
+      >
+        O telefone é obrigatório.
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="email">E-mail:</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="exemplo@email.com"
+      />
+      <small
+        style="color: #d32f2f; font-size: 13px;"
+        *ngIf="formContato.get('email')?.invalid && formContato.get('email')?.touched"
+      >
+        <span *ngIf="formContato.get('email')?.hasError('required')">
+          O e-mail é obrigatório.
+        </span>
+        <span *ngIf="formContato.get('email')?.hasError('email')">
+          Digite um formato de e-mail válido.
+        </span>
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="aniversario">Aniversário:</label>
+      <input
+        type="date"
+        id="aniversario"
+        formControlName="aniversario"
+      />
+      <small
+        style="color: #d32f2f; font-size: 13px;"
+        *ngIf="formContato.get('aniversario')?.invalid && formContato.get('aniversario')?.touched"
+      >
+        A data de aniversário é obrigatória.
+      </small>
+    </div>
+
+    <div class="campo">
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" formControlName="tipo">
+        <option value="" disabled>Selecione um tipo</option>
+        <option value="Amigo(a)">Amigo(a)</option>
+        <option value="Família">Família</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Outro">Outro</option>
+      </select>
+      <small
+        style="color: #d32f2f; font-size: 13px;"
+        *ngIf="formContato.get('tipo')?.invalid && formContato.get('tipo')?.touched"
+      >
+        Selecione um tipo de contato.
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="formContato.invalid">
+      Adicionar Contato
+    </button>
+  </form>
+
+  <hr />
+
+  <h3>Contatos Cadastrados</h3>
+
+  <table *ngIf="contatos.length > 0; else semContatos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th>Aniversário</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contato of contatos">
+        <td>{{ contato.nome }}</td>
+        <td>{{ contato.telefone }}</td>
+        <td>{{ contato.email }}</td>
+        <td>{{ contato.aniversario }}</td>
+        <td>{{ contato.tipo }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #semContatos>
+    <p class="vazio">Nenhum contato cadastrado ainda.</p>
+  </ng-template>
+</div>
